@@ -13,6 +13,7 @@ public class Main {
     static JTextField input1;
     static JTextField input2;
     static JTextField input3;
+    static JTextField input4;
     static JLabel outputText;
     static JLabel outputText2;
     static Long lo;
@@ -124,7 +125,7 @@ public class Main {
                     decorationSeed = x * i1 + z * i2 ^ l;
 
                     if (decSeeds.contains(decorationSeed & 0xFFFFFFFFFFFFL)) {
-                        AddOutput("DUPE FOUND: " + decorationSeed);
+                        AddOutput("DUPE FOUND: " + decorationSeed, filePath);
 
                         ArrayList<Float> floats = new ArrayList<>();
                         randomSupport = RandomSupport.upgradeSeedTo128bit(decorationSeed);
@@ -141,7 +142,7 @@ public class Main {
                                 if (streak <= 0) {
                                     streak--;
                                 } else {
-                                    if (streak > 11) {
+                                    if (streak > 8) {
                                         AddOutput("Streak of " + streak + " at " + i + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed, filePath);
                                     }
                                     streak = 0;
@@ -150,13 +151,13 @@ public class Main {
                                 if (streak >= 0) {
                                     streak++;
                                 } else {
-                                    if (streak < -11) {
+                                    if (streak < -8) {
                                         AddOutput("Streak of " + streak + " at " + i + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed, filePath);
                                     }
                                     streak = 0;
                                 }
                             } else {
-                                if (Math.abs(streak) > 11) {
+                                if (Math.abs(streak) > 8) {
                                     AddOutput("Streak of " + streak + " at " + i + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed, filePath);
                                 }
                                 streak = 0;
