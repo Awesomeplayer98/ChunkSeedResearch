@@ -27,8 +27,12 @@ public class Main {
         JFrame frame = SetUpWindow();
         decSeeds = new ArrayList<>();
 
-        mainText = SetUpText("Input: \n", 5, 5, 1110, 20);
+        mainText = SetUpText("Input: \n", 5, 5, 400, 20);
         frame.add(mainText);
+
+        input4 = new JTextField();
+        input4.setBounds(425, 10, 400, 30);
+        frame.add(input4);
 
         input1 = new JTextField();
         input1.setBounds(10, 40, 400, 30);
@@ -77,16 +81,16 @@ public class Main {
 
         button5.addActionListener(e -> {
             try {
-                CUSTOM();
+                CUSTOM(input4.getText());
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
     }
 
-    public static void CUSTOM() throws IOException {
+    public static void CUSTOM(String filePath) throws IOException {
         System.out.println("Started custom search");
-        ArrayList<Long> seedsList = new ArrayList<>();/*extractLongsFromFile("F:/I need more storage space/Zeke's channel stuff/versions/XoroshiroTools/seeds.txt");*/
+        ArrayList<Long> seedsList = new ArrayList<>();/*extractLongsFromFile(filePath + "/seeds.txt");*/
         Random r = new Random();
 
         decSeeds.add(7993349225660619373L); // tall cactus
@@ -138,7 +142,7 @@ public class Main {
                                     streak--;
                                 } else {
                                     if (streak > 11) {
-                                        AddOutput("Streak of " + streak + " at " + i + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed);
+                                        AddOutput("Streak of " + streak + " at " + i + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed, filePath);
                                     }
                                     streak = 0;
                                 }
@@ -147,13 +151,13 @@ public class Main {
                                     streak++;
                                 } else {
                                     if (streak < -11) {
-                                        AddOutput("Streak of " + streak + " at " + i + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed);
+                                        AddOutput("Streak of " + streak + " at " + i + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed, filePath);
                                     }
                                     streak = 0;
                                 }
                             } else {
                                 if (Math.abs(streak) > 11) {
-                                    AddOutput("Streak of " + streak + " at " + i + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed);
+                                    AddOutput("Streak of " + streak + " at " + i + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed, filePath);
                                 }
                                 streak = 0;
                             }
@@ -161,7 +165,7 @@ public class Main {
                         }
 
                         if (Math.abs((average / 200) - 1) > 0.375) {
-                            AddOutput("Average of " + (average / 100) + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed);
+                            AddOutput("Average of " + (average / 100) + " at " + x + ", " + z + " on seed " + l + " with decSeed of " + decorationSeed, filePath);
                         }
                     }
                 }
@@ -172,10 +176,10 @@ public class Main {
         // decSeeds.clear();
     }
 
-    public static void AddOutput(String s) {
+    public static void AddOutput(String s, String filePath) {
         //decSeeds.add(decorationSeed);
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("F:/I need more storage space/Zeke's channel stuff/versions/XoroshiroTools/output.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath + "/output.txt", true))) {
             writer.write(s);
             writer.newLine();
             writer.newLine();
